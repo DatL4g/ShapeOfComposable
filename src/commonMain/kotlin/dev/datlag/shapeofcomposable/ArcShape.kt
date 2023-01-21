@@ -11,16 +11,16 @@ import kotlin.math.abs
  * A shape with an inside or outside arc on one side.
  *
  * @param arcSizePx the size of the arc in pixel
- * @property position the position of the arc, either start (left) / top / end (right) / bottom
- * @property direction the direction of the arc either inside or outside
+ * @param position the position of the arc, either start (left) / top / end (right) / bottom
+ * @param direction the direction of the arc either inside or outside
  */
 data class ArcShape(
     internal val arcSizePx: Float,
-    val position: POSITION = POSITION.BOTTOM,
-    val direction: DIRECTION = DIRECTION.OUTSIDE
+    internal val position: POSITION = POSITION.BOTTOM,
+    internal val direction: DIRECTION = DIRECTION.OUTSIDE
 ) : ShapeOfComposable {
 
-    val sizePx: Float = abs(arcSizePx)
+    private val sizePx: Float = abs(arcSizePx)
 
     override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {
         return Outline.Generic(Path().apply {

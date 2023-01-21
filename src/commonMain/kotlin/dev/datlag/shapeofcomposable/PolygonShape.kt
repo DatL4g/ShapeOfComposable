@@ -12,7 +12,7 @@ import kotlin.math.max
 import kotlin.math.sin
 
 data class PolygonShape(
-    val sides: Int
+    internal val sides: Int
 ) : ShapeOfComposable {
 
     override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {

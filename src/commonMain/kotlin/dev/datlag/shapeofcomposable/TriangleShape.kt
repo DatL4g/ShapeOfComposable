@@ -7,9 +7,9 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 
 data class TriangleShape(
-    val start: Float,
-    val end: Float,
-    val bottom: Float,
+    internal val start: Float,
+    internal val end: Float,
+    internal val bottom: Float,
 ): ShapeOfComposable {
 
     override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {

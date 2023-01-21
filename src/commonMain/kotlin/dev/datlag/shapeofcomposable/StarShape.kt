@@ -11,7 +11,7 @@ import kotlin.math.sin
 import kotlin.math.cos
 
 data class StarShape(
-    val points: Int
+    internal val points: Int
 ) : ShapeOfComposable {
 
     override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {

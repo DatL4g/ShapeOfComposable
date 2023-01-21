@@ -10,13 +10,13 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 
 data class DottedEdgesCutCornerShape constructor(
-    val startTopCutSize: CornerSize = CornerSize(0F),
-    val endTopCutSize: CornerSize = CornerSize(0F),
-    val startBottomCutSize: CornerSize = CornerSize(0F),
-    val endBottomCutSize: CornerSize = CornerSize(0F),
-    val dotPositions: Collection<POSITION>,
-    val dotRadius: Float = 0F,
-    val dotSpacing: Float = 0F
+    internal val startTopCutSize: CornerSize = CornerSize(0F),
+    internal val endTopCutSize: CornerSize = CornerSize(0F),
+    internal val startBottomCutSize: CornerSize = CornerSize(0F),
+    internal val endBottomCutSize: CornerSize = CornerSize(0F),
+    internal val dotPositions: Collection<POSITION>,
+    internal val dotRadius: Float = 0F,
+    internal val dotSpacing: Float = 0F
 ) : ShapeOfComposable, CornerBasedShape(startTopCutSize, endTopCutSize, endBottomCutSize, startBottomCutSize) {
 
     constructor(
@@ -26,7 +26,7 @@ data class DottedEdgesCutCornerShape constructor(
         dotSpacing: Float = 0F
     ) : this(cutSize, cutSize, cutSize, cutSize, dotPositions, dotRadius, dotSpacing)
 
-    internal constructor(
+    constructor(
         cutSize: Float = 0F,
         dotPositions: Collection<POSITION>,
         dotRadius: Float = 0F,

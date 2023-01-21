@@ -10,11 +10,11 @@ import kotlin.math.abs
 import kotlin.math.tan
 
 data class DiagonalShape(
-    val angle: Float = 0F,
-    val position: POSITION = POSITION.TOP
+    internal val angle: Float = 0F,
+    internal val position: POSITION = POSITION.TOP
 ) : ShapeOfComposable {
 
-    val direction: DIRECTION
+    private val direction: DIRECTION
         get() = if (angle > 0) DIRECTION.LEFT else DIRECTION.RIGHT
 
     override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {

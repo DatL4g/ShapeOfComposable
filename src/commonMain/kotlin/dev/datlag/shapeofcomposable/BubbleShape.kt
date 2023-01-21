@@ -6,15 +6,28 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 
+/**
+ * A shape which looks like a chat bubble.
+ * Has an arrow on one side
+ *
+ * @param radiusStartTopPx the size of the start-top radius in pixel
+ * @param radiusEndTopPx the size of the end-top radius in pixel
+ * @param radiusStartBottomPx the size of the start-bottom radius in pixel
+ * @param radiusEndBottomPx the size of the end-bottom radius in pixel
+ * @param arrowWidthPx the width of the arrow in pixel
+ * @param arrowHeightPx the height of the arrow in pixel
+ * @param position the position of the arrow, either start (left) / top / end (right) / bottom
+ * @param placement the direction of the arc either inside or outside
+ */
 data class BubbleShape(
-    val radiusStartTopPx: Float,
-    val radiusEndTopPx: Float,
-    val radiusStartBottomPx: Float,
-    val radiusEndBottomPx: Float,
-    val arrowWidthPx: Float,
-    val arrowHeightPx: Float,
-    val position: POSITION = POSITION.BOTTOM,
-    val placement: Float = 0.5F
+    internal val radiusStartTopPx: Float,
+    internal val radiusEndTopPx: Float,
+    internal val radiusStartBottomPx: Float,
+    internal val radiusEndBottomPx: Float,
+    internal val arrowWidthPx: Float,
+    internal val arrowHeightPx: Float,
+    internal val position: POSITION = POSITION.BOTTOM,
+    internal val placement: Float = 0.5F
 ) : ShapeOfComposable {
 
     constructor(
