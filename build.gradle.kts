@@ -12,7 +12,7 @@ plugins {
 
 val libName = "shapeofcomposable"
 val libArtifact = "dev.datlag.$libName"
-val libVersion = "1.0.0"
+val libVersion = "1.0.1"
 
 group = libArtifact
 version = libVersion
@@ -39,6 +39,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(compose.runtime)
                 implementation(compose.foundation)
             }
         }
@@ -56,6 +57,14 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         sourceCompatibility = JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.4"
     }
 }
 
