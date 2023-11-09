@@ -49,9 +49,20 @@ kotlin {
 android {
     compileSdk = 34
     namespace = libArtifact
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 
     defaultConfig {
         minSdk = 21
+
+        aarMetadata {
+            minCompileSdk = 21
+        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+        }
     }
 
     compileOptions {
