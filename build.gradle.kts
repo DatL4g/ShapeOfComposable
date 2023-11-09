@@ -1,23 +1,29 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("multiplatform") version "1.7.20"
-    id("org.jetbrains.compose") version "1.2.2"
-    id("maven-publish")
-    id("signing")
-    id("com.vanniktech.maven.publish") version "0.22.0"
+    kotlin("multiplatform") version "1.9.20"
+    id("org.jetbrains.compose") version "1.5.10"
+    `maven-publish`
+    signing
+    id("com.vanniktech.maven.publish") version "0.25.3"
+    id("com.android.library") version "8.1.3"
 }
 
-group = "dev.datlag.shapeofcomposable"
-version = "1.0.0"
+val libName = "shapeofcomposable"
+val libArtifact = "dev.datlag.$libName"
+val libVersion = "1.0.0"
+
+group = libArtifact
+version = libVersion
 
 repositories {
     google()
     mavenCentral()
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
 }
 
 kotlin {
+    androidTarget()
     macosX64()
     iosX64()
     iosArm64()
@@ -27,22 +33,29 @@ kotlin {
         browser()
         binaries.executable()
     }
+
+    applyDefaultHierarchyTemplate()
+
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation(compose.foundation)
             }
         }
-        val jvmMain by getting
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-        }
+    }
+}
+
+android {
+    compileSdk = 34
+    namespace = libArtifact
+
+    defaultConfig {
+        minSdk = 21
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
     }
 }
 
@@ -50,8 +63,14 @@ mavenPublishing {
     publishToMavenCentral(host = SonatypeHost.S01, automaticRelease = true)
     signAllPublications()
 
+    coordinates(
+        groupId = "dev.datlag",
+        artifactId = libName,
+        version = libVersion
+    )
+
     pom {
-        name.set(project.name)
+        name.set(libName)
         description.set("ShapeOfComposable is a multi-platform compose library to clip any composeable to a custom shape.")
         url.set("https://github.com/DatL4g/ShapeOfComposable")
 
@@ -75,4 +94,8 @@ mavenPublishing {
             }
         }
     }
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
 }
